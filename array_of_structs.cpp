@@ -2,8 +2,6 @@
 #include <fstream>
 using namespace std;
 
-// TODO: Step 1 - Define the struct TemperatureRecord
-// It should contain two integer fields: day and temperature.
 struct TemperatureRecord {
     int day;
     int temperature;
@@ -13,19 +11,18 @@ struct TemperatureRecord {
 const int MAX_DAYS = 31;
 
 // Function Prototypes
-void readTemperatures(???); // TODO: Fix the parameters
+void readTemperatures(TemperatureRecord data[]); // TODO: Fix the parameters
 void printTemperatures(const ???);
 TemperatureRecord findMin(const ???);
 TemperatureRecord findMax(const ???);
 double findAverage(const ???);
 
 int main() {
-    // TODO: Step 2 - Declare an array of TemperatureRecord structs (MAX_DAYS size)
-    TemperatureRecord record[MAX_DAYS];
+    TemperatureRecord data[MAX_DAYS];
     
     int size = 0;  // Actual number of records read
 
-    // TODO: Step 3 - Call readTemperatures() to load data from file
+    readTemperatures(data);
 
     // TODO: Step 4 - Print the temperatures
 
@@ -33,6 +30,22 @@ int main() {
 
     return 0;
 }
+
+void readTemperatures(TemperatureRecord data[]) {
+    ifstream dataFile;
+
+    dataFile.open("temps.txt");
+
+    if (!dataFile) {
+        cout << "File did not open" << endl;
+        return;
+    }
+
+    int size = 0;
+    while (dataFile >> data[size].day && dataFile >> data[size].temperature && size < MAX_DAYS){
+        size++;
+    }
+} 
 
 // TODO: Step 6 - Implement readTemperatures()
 // Read from "temps.txt" and store data in the array
