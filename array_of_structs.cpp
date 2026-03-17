@@ -12,31 +12,34 @@ struct TemperatureRecord {
 const int MAX_DAYS = 31;
 
 // Function Prototypes
-void readTemperatures(TemperatureRecord data[]);
+void readTemperatures(TemperatureRecord data[], int& size);
 void printTemperatures(const TemperatureRecord data[]);
-TemperatureRecord findMin(const ???);
-TemperatureRecord findMax(const ???);
-double findAverage(const TemperatureRecord data[]);
+TemperatureRecord findMin(const TemperatureRecord data[], int size);
+TemperatureRecord findMax(const TemperatureRecord data[], int size);
+double findAverage(const TemperatureRecord data[], int size);
 
 int main() {
     TemperatureRecord data[MAX_DAYS];
     
     int size = 0;  // Actual number of records read
 
-    readTemperatures(data);
+    readTemperatures(data, size);
 
     printTemperatures(data);
 
     cout << endl;
 
-    // TODO: Step 5 - Compute and display min, max, and average temperature
-    findAverage(data);
-    
+    findAverage(data, size);
+
+
+    cout << "The max is on day " << findMax(data, size).day << " and is " << findMax(data, size).temperature << " degrees\n";
+
+    cout << "The min is on day " << findMin(data, size).day << " and is " << findMin(data, size).temperature << " degrees\n";
 
     return 0;
 }
 
-void readTemperatures(TemperatureRecord data[]) {
+void readTemperatures(TemperatureRecord data[], int& size) {
     ifstream dataFile;
 
     dataFile.open("temps.txt");
@@ -46,7 +49,6 @@ void readTemperatures(TemperatureRecord data[]) {
         return;
     }
 
-    int size = 0;
     while (dataFile >> data[size].day && dataFile >> data[size].temperature && size < MAX_DAYS){
         size++;
     }
@@ -64,18 +66,40 @@ void printTemperatures (TemperatureRecord data[]) {
     }
 }
 
+TemperatureRecord findMax (TemperatureRecord data[], int size) {
+    int largestIndex;
+    double largest = data[0].temperature;
 
-// TODO: Step 9 - Implement findMax()
-// Return the TemperatureRecord with the highest temperature
+    for (int i = 0; i < size; i++) {
+        if (data[i].temperature > largest) {
+            largestIndex = i;
+            largest = data[i].temperature;
+        }
+    }
 
-// TODO: Step 10 - Implement findAverage()
-// Compute and return the average temperature
-double findAverage (TemperatureRecord data[]) {
+    return data[largestIndex];
+}
+
+TemperatureRecord findMin (TemperatureRecord data[], int size) {
+    int smallestIndex;
+    double smallest = data[0].temperature;
+
+    for (int i = 0; i < size; i++) {
+        if (data[i].temperature < smallest) {
+            smallestIndex = i;
+            smallest = data[i].temperature;
+        }
+    }
+
+    return data[smallestIndex];
+}
+
+double findAverage (TemperatureRecord data[], int size) {
     double total;
 
-    int size = 0;
-    while (total += data[size].temperature)
-        size++;
+    int i = 0;
+    while (total += data[size].temperature && i < MAX_DAYS)
+        i++;
 
     return (total / static_cast<double> (size));
 }
