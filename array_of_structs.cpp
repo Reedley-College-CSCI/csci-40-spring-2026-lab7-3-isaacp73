@@ -12,11 +12,11 @@ struct TemperatureRecord {
 const int MAX_DAYS = 31;
 
 // Function Prototypes
-void readTemperatures(TemperatureRecord data[]); // TODO: Fix the parameters
+void readTemperatures(TemperatureRecord data[]);
 void printTemperatures(const TemperatureRecord data[]);
 TemperatureRecord findMin(const ???);
 TemperatureRecord findMax(const ???);
-double findAverage(const ???);
+double findAverage(const TemperatureRecord data[]);
 
 int main() {
     TemperatureRecord data[MAX_DAYS];
@@ -25,10 +25,13 @@ int main() {
 
     readTemperatures(data);
 
-    // TODO: Step 4 - Print the temperatures
     printTemperatures(data);
 
+    cout << endl;
+
     // TODO: Step 5 - Compute and display min, max, and average temperature
+    findAverage(data);
+    
 
     return 0;
 }
@@ -67,3 +70,12 @@ void printTemperatures (TemperatureRecord data[]) {
 
 // TODO: Step 10 - Implement findAverage()
 // Compute and return the average temperature
+double findAverage (TemperatureRecord data[]) {
+    double total;
+
+    int size = 0;
+    while (total += data[size].temperature)
+        size++;
+
+    return (total / static_cast<double> (size));
+}
